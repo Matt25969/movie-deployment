@@ -3,8 +3,8 @@ pipeline{
         stages{ 
 		stage('---cleanUp---'){
                         steps{
-                                sh "rm -R /var/lib/wildfly-10.1.0.Final/standalone/deployments"
-				sh "mkdir /var/lib/wildfly-10.1.0.Final/standalone/deployments"
+                                sh "sudo rm -R /var/lib/wildfly-10.1.0.Final/standalone/deployments"
+				sh "sudo mkdir /var/lib/wildfly-10.1.0.Final/standalone/deployments"
                         }
                 }
                 stage('---clean---'){
