@@ -3,9 +3,7 @@ pipeline{
         stages{ 
 		stage('---cleanUp---'){
                         steps{
-				dir ('/var/lib/wildfly-10.1.0.Final/standalone/deployments') {
-            				deleteDir()
-		        	}	
+				sh "sudo rm -rf /var/lib/wildfly-10.1.0.Final/standalone/deployments/*"	
                         }
                 }
                 stage('---clean---'){
