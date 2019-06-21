@@ -1,6 +1,11 @@
 pipeline{
         agent any
         stages{ 
+		stage('---clean---'){
+                        steps{
+                                sh "sudo rm -rf /var/lib/wildfly-10.1.0.Final/standalone/deployments/*"
+                        }
+                }
                 stage('---clean---'){
                         steps{
                                 sh "mvn clean"
