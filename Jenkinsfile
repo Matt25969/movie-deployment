@@ -1,6 +1,12 @@
 pipeline{
         agent any
-        stages{
+        stages{ 
+		stage('---cleanUp---'){
+                        steps{
+                                sh "rm -R /var/lib/wildfly-10.1.0.Final/standalone/deployments"
+				sh "mkdir /var/lib/wildfly-10.1.0.Final/standalone/deployments"
+                        }
+                }
                 stage('---clean---'){
                         steps{
                                 sh "mvn clean"
@@ -36,8 +42,14 @@ pipeline{
                         steps{
                                 sh "cd /"
 				sh "pwd"
-				sh "sudo cp target/movieapp.war /home/matt_joe_hunt/scripts/wildfly-10.1.0.Final/standalone/deployments/"
+				sh "sudo cp target/movieapp.war /var/lib/wildfly-10.1.0.Final/standalone/deployments/"
                         }
                 }
+		stage('--email--'){
+                        steps{
+                                emailext attachLog: true, attachmentsPattern: 'target/site/jacoco/index.html, target/site/surefire-report.html', body: '', subject: '', to: 'jenkinscohort123@gmail.com'
+                        }
+		}
+
         }
 }
